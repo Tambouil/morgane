@@ -18,8 +18,40 @@ const { title, description } = Astro.props;
     <slot />
 
     <style is:global>
+      @font-face {
+        font-family: 'scotch-display';
+        src: url('/fonts/scotch-display/scotchDisplay.otf') format('opentype');
+        font-display: auto;
+        font-style: normal;
+        font-weight: 300;
+        font-stretch: normal;
+      }
+      @font-face {
+        font-family: 'scotch-display';
+        src: url('/fonts/scotch-display/scotchDisplayItalic.otf') format('opentype');
+        font-display: auto;
+        font-style: italic;
+        font-weight: 500;
+        font-stretch: normal;
+      }
+      @font-face {
+        font-family: 'botanika-mono-web';
+        src: url('/fonts/botanika-mono-web/botanika-mono-web.otf') format('opentype');
+        font-display: auto;
+        font-style: normal;
+        font-weight: 400;
+        font-stretch: normal;
+      }
+      @font-face {
+        font-family: 'kudryashev-d-excontrast-sans';
+        src: url('/fonts/kudryashev-d-excontrast-sans/kudryashev-d-excontrast-sans.otf') format('opentype');
+        font-display: auto;
+        font-style: normal;
+        font-weight: 300;
+        font-stretch: normal;
+      }
       :root {
-        --color-bg: #ede9e6;
+        --color-bg: #f9f1ea;
         --color-text: #000;
         --color-text-black: #282828;
         --color-text-alt: #767474;
@@ -32,13 +64,13 @@ const { title, description } = Astro.props;
         box-sizing: border-box;
       }
       body {
-        margin: 0;
-        padding: 0;
-        background-color: var(--color-bg);
-        color: var(--color-text);
-        font-family: 'Raleway', sans-serif;
+        font-family: 'Inter Variable', sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        background-color: var(--color-bg);
+        color: var(--color-text);
+        padding: 0;
+        margin: 0;
       }
       a {
         text-decoration: none;

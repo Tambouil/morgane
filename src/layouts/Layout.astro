@@ -1,5 +1,7 @@
 ---
+import '@fontsource-variable/inter';
 import MainHead from '~/components/MainHead.astro';
+import Navigation from '~/components/Navigation.astro';
 
 interface Props {
   title?: string;
@@ -13,6 +15,7 @@ const { title, description } = Astro.props;
 <html lang="fr">
   <head>
     <MainHead title={title} description={description} />
+    <Navigation />
   </head>
   <body>
     <slot />
@@ -54,7 +57,7 @@ const { title, description } = Astro.props;
         --color-bg: #f9f1ea;
         --color-text: #000;
         --color-text-black: #282828;
-        --color-text-alt: #767474;
+        --color-text-alt: #be725c;
         --color-link: #aaa;
         --color-link-hover: #fff;
       }

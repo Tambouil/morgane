@@ -2,6 +2,7 @@
 import '@fontsource-variable/inter';
 import MainHead from '~/components/MainHead.astro';
 import Navigation from '~/components/Navigation.astro';
+import MobileNavigation from '~/components/MobileNavigation.astro';
 
 interface Props {
   title?: string;
@@ -15,6 +16,7 @@ const { title, description } = Astro.props;
 <html lang="fr">
   <head>
     <MainHead title={title} description={description} />
+    <MobileNavigation />
     <Navigation />
   </head>
   <body>

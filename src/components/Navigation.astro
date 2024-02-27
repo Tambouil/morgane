@@ -43,6 +43,17 @@ const navItems = [
   </div>
 </nav>
 
+<script>
+  import { isOpen } from '~/store.js';
+
+  const openContact = () => {
+    isOpen.set(true);
+  };
+
+  const navItemContact = document.querySelector('.nav__item-contact');
+  navItemContact?.addEventListener('click', openContact);
+</script>
+
 <style>
   .desktop__nav {
     display: none;

@@ -1,0 +1,238 @@
+---
+import Clipboard from './Clipboard.astro';
+---
+
+<div class="overlay" transition:persist transition:name="overlay"></div>
+<div class="drawer" transition:persist transition:name="drawer">
+  <div class="drawer__inner">
+    <div class="drawer__top">
+      <h5>Contact</h5>
+      <div class="close__btn">
+        <svg
+          stroke="currentColor"
+          fill="currentColor"
+          stroke-width="0"
+          viewBox="0 0 24 24"
+          height="1em"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path fill="none" stroke="#fff" stroke-width="2" d="M3,3 L21,21 M3,21 L21,3"> </path>
+        </svg>
+      </div>
+    </div>
+    <div class="drawer__details">
+      <div class="caps">Adresse</div>
+      <a href="https://www.google.com/maps/place/Paris/" target="_blank"> Paris, France.</a>
+    </div>
+    <div class="drawer__details">
+      <div class="caps">Téléphone</div>
+      <a href="tel:0679009529" rel="nofollow"> Appeler maintenant</a>
+    </div>
+    <div class="drawer__details">
+      <div class="caps">Email</div>
+      <Clipboard text="Copier" confirmText="Texte copié" />
+    </div>
+  </div>
+
+  <script>
+    import { isOpen } from '~/store.js';
+    import gsap from 'gsap';
+
+    const overlay = document.querySelector('.overlay') as HTMLElement;
+    const drawer = document.querySelector('.drawer') as HTMLElement;
+    const drawerInner = document.querySelector('.drawer .drawer__inner') as HTMLElement;
+    const closeBtn = document.querySelector('.close__btn') as HTMLElement;
+
+    const openDrawer = () => {
+      const tl = gsap.timeline();
+
+      tl.to([overlay, drawer, drawerInner], {
+        opacity: 1,
+        duration: 0.3,
+        ease: 'ease-in-out',
+        onStart: () => {
+          gsap.set([overlay, drawer, drawerInner], { visibility: 'visible' });
+        },
+      })
+        .fromTo(
+          [drawer],
+          { xPercent: 50, yPercent: -50 },
+          { xPercent: 0, yPercent: 0, duration: 0.5, ease: 'ease-in-out' },
+          0
+        )
+        .fromTo(
+          [drawerInner],
+          { xPercent: 25, yPercent: -25 },
+          { xPercent: 0, yPercent: 0, duration: 0.5, ease: 'ease-in-out' },
+          0
+        );
+    };
+
+    const closeDrawer = () => {
+      isOpen.set(false);
+
+      const tl = gsap.timeline();
+
+      tl.to([overlay, drawer, drawerInner], {
+        opacity: 0,
+        duration: 0.5,
+        ease: 'ease-in-out',
+        onComplete: () => {
+          gsap.set([overlay, drawer, drawerInner], { visibility: 'hidden' });
+        },
+      });
+
+      tl.fromTo(
+        [drawer],
+        { xPercent: 0, yPercent: 0 },
+        { xPercent: 50, yPercent: -50, duration: 0.5, ease: 'ease-in-out' },
+        0
+      );
+      tl.fromTo(
+        [drawerInner],
+        { xPercent: 0, yPercent: 0 },
+        { xPercent: 25, yPercent: -25, duration: 0.5, ease: 'ease-in-out' },
+        0
+      );
+    };
+
+    const toggleDrawer = () => {
+      isOpen.subscribe((open) => {
+        if (open) {
+          openDrawer();
+        } else {
+          closeDrawer();
+        }
+      });
+    };
+    toggleDrawer();
+
+    overlay.addEventListener('click', closeDrawer);
+    closeBtn.addEventListener('click', closeDrawer);
+  </script>
+
+  <style>
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.4);
+      height: 100%;
+      opacity: 0;
+      position: fixed;
+      right: 0;
+      top: 0;
+      visibility: hidden;
+      width: 100%;
+      will-change: opacity;
+      z-index: 5;
+    }
+    .visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    .drawer {
+      will-change: transform;
+      position: fixed;
+      background-color: var(--color-text-alt);
+      top: 0px;
+      right: 0px;
+      z-index: 10;
+      flex-direction: column;
+      width: calc(100% - 6.25rem);
+      padding: 2.5rem 2.1875rem;
+      border-bottom-left-radius: 1.25rem;
+      overflow: hidden;
+      visibility: hidden;
+      opacity: 0;
+    }
+
+    .drawer .drawer__inner {
+      opacity: 0;
+      visibility: hidden;
+      animation: none;
+    }
+
+    .drawer .drawer__top {
+      display: flex;
+      -webkit-box-pack: justify;
+      justify-content: space-between;
+      width: 100%;
+      -webkit-box-align: center;
+      align-items: center;
+      margin-bottom: 7.5rem;
+    }
+
+    .drawer .drawer__details {
+      margin-top: 1.875rem;
+    }
+
+    .close__btn {
+      height: 2.5rem;
+      width: 2.5rem;
+      border-radius: 2.5rem;
+      border: 1px solid rgb(217, 217, 217);
+      margin-right: 0.9rem;
+      display: flex;
+      -webkit-box-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      justify-content: center;
+      margin-right: 0px;
+      border-color: white;
+      cursor: pointer;
+    }
+
+    .drawer a {
+      all: unset;
+      cursor: pointer;
+      text-decoration: none;
+      color: white;
+      font-size: 1rem;
+    }
+
+    .caps {
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+
+    .caps,
+    p {
+      font-size: 1rem;
+      color: white;
+    }
+
+    .drawer h5 {
+      font-size: 3rem;
+      font-weight: 300;
+      letter-spacing: -0.02rem;
+      margin: 0px;
+      color: white;
+    }
+
+    .drawer.slide__in,
+    .drawer.slide__in .drawer__inner {
+      animation: slideIn 0.3s ease-in-out forwards;
+    }
+
+    .drawer.slide__out,
+    .drawer.slide__out .drawer__inner {
+      animation: slideOut 0.3s ease-in-out forwards;
+    }
+
+    @media (min-width: 768px) {
+      .drawer {
+        width: auto;
+        min-width: 350px;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .drawer {
+        letter-spacing: -0.02rem;
+      }
+      h5 {
+        font-size: 3rem;
+      }
+    }
+  </style>
+</div>

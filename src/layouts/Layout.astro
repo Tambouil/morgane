@@ -3,6 +3,7 @@ import '@fontsource-variable/inter';
 import MainHead from '~/components/MainHead.astro';
 import Navigation from '~/components/Navigation.astro';
 import MobileNavigation from '~/components/MobileNavigation.astro';
+import Contact from '~/components/Contact.astro';
 
 interface Props {
   title?: string;
@@ -16,11 +17,12 @@ const { title, description } = Astro.props;
 <html lang="fr">
   <head>
     <MainHead title={title} description={description} />
-    <MobileNavigation />
-    <Navigation />
   </head>
   <body>
     <slot />
+    <MobileNavigation />
+    <Navigation />
+    <Contact />
 
     <style is:global>
       @font-face {
@@ -60,6 +62,7 @@ const { title, description } = Astro.props;
         --color-text: #000;
         --color-text-black: #282828;
         --color-text-alt: #be725c;
+        --color-gold: #d19e59;
         --color-link: #aaa;
         --color-link-hover: #fff;
       }

@@ -1,0 +1,67 @@
+---
+const { text, confirmText } = Astro.props;
+---
+
+<div class="c2c">
+  <p class="text">{text}</p>
+  <p class="confirmText hidden">{confirmText}</p>
+  <svg
+    stroke="currentColor"
+    fill="none"
+    stroke-width="2"
+    viewBox="0 0 24 24"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    height="1em"
+    width="1em"
+    xmlns="http://www.w3.org/2000/svg"
+    ><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path
+      d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+  </svg>
+</div>
+
+<script>
+  const c2c = document.querySelector('.c2c') as HTMLElement;
+  const email = 'cerceaumorgane@gmail.com';
+
+  const originalText = document.querySelector('.text') as HTMLElement;
+  const confirmText = document.querySelector('.confirmText') as HTMLElement;
+
+  c2c.addEventListener('click', () => {
+    navigator.clipboard.writeText(email);
+
+    originalText.classList.add('hidden');
+    confirmText.classList.remove('hidden');
+
+    setTimeout(() => {
+      originalText.classList.remove('hidden');
+      confirmText.classList.add('hidden');
+    }, 2000);
+  });
+</script>
+
+<style>
+  .c2c {
+    cursor: pointer;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+  }
+  .c2c p {
+    margin: 0px;
+    color: white;
+  }
+  .c2c svg {
+    margin-left: 10px;
+    stroke: white;
+  }
+
+  .confirmText {
+    margin-left: 10px;
+    color: white;
+  }
+
+  .hidden {
+    display: none;
+  }
+</style>

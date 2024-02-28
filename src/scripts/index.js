@@ -1,10 +1,10 @@
+import Lenis from '@studio-freight/lenis';
+import { Flip } from 'gsap/Flip';
 import { isInViewport } from './utils';
 import { Preview } from './preview';
-// import Lenis from '@studio-freight/lenis';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
-import { Flip } from 'gsap/Flip';
 gsap.registerPlugin(Flip);
 
 const ANIMATION_CONFIG = { duration: 1.5, ease: 'power4.inOut' };
@@ -17,26 +17,23 @@ previewElems.forEach((item, pos) => {
 });
 const backCtrl = document.querySelector('.action--back');
 
-// Smooth scrolling.
 let lenis;
-// Current open item's position
 let currentItem = -1;
 
 let isAnimating = false;
 
-// const initSmoothScrolling = () => {
-//   // Smooth scrolling initialization (using Lenis https://github.com/studio-freight/lenis)
-//   lenis = new Lenis({
-//     lerp: 0.1,
-//     smooth: true,
-//     direction: 'vertical',
-//   });
-//   const scrollFn = () => {
-//     lenis.raf();
-//     requestAnimationFrame(scrollFn);
-//   };
-//   requestAnimationFrame(scrollFn);
-// };
+const initSmoothScrolling = () => {
+  const lenis = new Lenis({
+    lerp: 0.2,
+    smoothWheel: true,
+  });
+
+  const scrollFn = (time) => {
+    lenis.raf(time);
+    requestAnimationFrame(scrollFn);
+  };
+  requestAnimationFrame(scrollFn);
+};
 
 const animateOnScroll = () => {
   for (const item of previewItems) {
@@ -94,7 +91,7 @@ const showContent = (item) => {
         // Stop the "animate on scroll" timeline for this item
         //item.scrollTimeline.pause();
         // Stop the Lenis instance
-        // lenis.stop();
+        lenis.stop();
 
         // Overflow hidden and pointer events control class
         document.body.classList.add('content-open');
@@ -230,10 +227,10 @@ const hideContent = () => {
       defaults: ANIMATION_CONFIG,
       onComplete: () => {
         // Stop the "animate on scroll" timeline for this item
-        //item.scrollTimeline.play();
+        item.scrollTimeline.play();
 
         // Start the Lenis instance
-        // lenis.start();
+        lenis.start();
 
         // Overflow hidden and pointer events control class
         document.body.classList.remove('content-open');
@@ -353,11 +350,6 @@ const initEvents = () => {
   });
 };
 
-// Preload images and initialize scrolling animations
-// preloadImages('.preview__img-inner, .content__thumbs-item').then((_) => {
-document.body.classList.remove('loading');
-
-// initSmoothScrolling();
+initSmoothScrolling();
 animateOnScroll();
 initEvents();
-// });

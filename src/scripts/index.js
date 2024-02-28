@@ -27,11 +27,10 @@ let isAnimating = false;
 const initSmoothScrolling = () => {
   lenis = new Lenis({
     lerp: 0.1,
-    smooth: true,
-    direction: 'vertical',
+    smoothWheel: true,
   });
-  const scrollFn = () => {
-    lenis.raf();
+  const scrollFn = (time) => {
+    lenis.raf(time);
     requestAnimationFrame(scrollFn);
   };
   requestAnimationFrame(scrollFn);
@@ -211,7 +210,6 @@ const showContent = (item) => {
     )
     // content text (lines)
     .add(() => {
-      console.log(item.content);
       item.content.multiLine.in();
 
       gsap.set(item.content.DOM.text, {

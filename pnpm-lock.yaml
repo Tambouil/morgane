@@ -11,6 +11,9 @@ dependencies:
   '@fontsource-variable/inter':
     specifier: ^5.0.16
     version: 5.0.16
+  '@studio-freight/lenis':
+    specifier: ^1.0.39
+    version: 1.0.39
   astro:
     specifier: ^4.4.5
     version: 4.4.5(typescript@5.3.3)
@@ -749,6 +752,10 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
+
+  /@studio-freight/lenis@1.0.39:
+    resolution: {integrity: sha512-63LPZD087kFSiNS3lF6Uve8fFeshQwNCXrl7DUocoeUYiElVTzr9a+dLodNBa0Yn5NZ4umAoQQ6LOosB5I6AAQ==}
+    dev: false
 
   /@types/babel__core@7.20.5:
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}

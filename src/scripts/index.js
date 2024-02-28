@@ -23,11 +23,11 @@ let currentItem = -1;
 let isAnimating = false;
 
 const initSmoothScrolling = () => {
-  const lenis = new Lenis({
+  lenis = new Lenis({
     lerp: 0.2,
-    smoothWheel: true,
+    smooth: true,
+    orientation: 'vertical',
   });
-
   const scrollFn = (time) => {
     lenis.raf(time);
     requestAnimationFrame(scrollFn);

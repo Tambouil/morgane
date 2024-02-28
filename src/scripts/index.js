@@ -24,7 +24,7 @@ let isAnimating = false;
 
 const initSmoothScrolling = () => {
   lenis = new Lenis({
-    lerp: 0.2,
+    lerp: 0.1,
     smooth: true,
     orientation: 'vertical',
   });

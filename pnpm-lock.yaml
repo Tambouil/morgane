@@ -20,6 +20,9 @@ dependencies:
   nanostores:
     specifier: ^0.10.0
     version: 0.10.0
+  split-type:
+    specifier: ^0.3.4
+    version: 0.3.4
   typescript:
     specifier: ^5.3.3
     version: 5.3.3
@@ -3099,6 +3102,10 @@ packages:
 
   /space-separated-tokens@2.0.2:
     resolution: {integrity: sha512-PEGlAwrG8yXGXRjW32fGbg66JAlOAwbObuqVoJpv/mRgoWDQfgH1wDPvtzWyUSNAXBGSk8h755YDbbcEy3SH2Q==}
+    dev: false
+
+  /split-type@0.3.4:
+    resolution: {integrity: sha512-otEk9vnD8qwfLsk3Lx0gz+qRkNIJCx0mlyL47ImP/DjMuV39d75Lpfwjn9fHteDRz0aoOblSzQjSNT9+Sswxcg==}
     dev: false
 
   /sprintf-js@1.0.3:

@@ -85,11 +85,11 @@ const projects = [
           <div class="content">
             <div class="content__group">
               <div class="content__title">
-                <span class="oh">
-                  {project.preview_titles.map((title) => (
+                {project.preview_titles.map((title) => (
+                  <span class="oh">
                     <span class="oh__inner">{title}</span>
-                  ))}
-                </span>
+                  </span>
+                ))}
               </div>
               <div class="content__meta oh">
                 <span class="oh__inner">{project.content_author}</span>

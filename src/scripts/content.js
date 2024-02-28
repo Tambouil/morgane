@@ -30,7 +30,7 @@ export class Content {
     this.DOM.titleInner = [...this.DOM.title.querySelectorAll('.oh__inner')];
     this.DOM.metaInner = this.DOM.el.querySelector('.content__meta > .oh__inner');
     this.DOM.text = this.DOM.el.querySelector('.content__text');
-    // this.multiLine = new TextLinesReveal(this.DOM.text);
+    this.multiLine = new TextLinesReveal(this.DOM.text);
     this.DOM.thumbs = [...this.DOM.el.querySelectorAll('.content__thumbs-item')];
   }
 }

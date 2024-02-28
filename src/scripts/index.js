@@ -1,9 +1,9 @@
 import Lenis from '@studio-freight/lenis';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Flip } from 'gsap/Flip';
 import { isInViewport } from './utils';
 import { Preview } from './preview';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(Flip);
 
@@ -17,7 +17,9 @@ previewElems.forEach((item, pos) => {
 });
 const backCtrl = document.querySelector('.action--back');
 
+// Smooth scrolling.
 let lenis;
+// Current open item's position
 let currentItem = -1;
 
 let isAnimating = false;
@@ -26,10 +28,10 @@ const initSmoothScrolling = () => {
   lenis = new Lenis({
     lerp: 0.1,
     smooth: true,
-    orientation: 'vertical',
+    direction: 'vertical',
   });
-  const scrollFn = (time) => {
-    lenis.raf(time);
+  const scrollFn = () => {
+    lenis.raf();
     requestAnimationFrame(scrollFn);
   };
   requestAnimationFrame(scrollFn);
@@ -209,7 +211,8 @@ const showContent = (item) => {
     )
     // content text (lines)
     .add(() => {
-      // item.content.multiLine.in();
+      console.log(item.content);
+      item.content.multiLine.in();
 
       gsap.set(item.content.DOM.text, {
         opacity: 1,
@@ -227,7 +230,7 @@ const hideContent = () => {
       defaults: ANIMATION_CONFIG,
       onComplete: () => {
         // Stop the "animate on scroll" timeline for this item
-        item.scrollTimeline.play();
+        //item.scrollTimeline.play();
 
         // Start the Lenis instance
         lenis.start();
@@ -280,7 +283,7 @@ const hideContent = () => {
     )
     // content text (lines)
     .add(() => {
-      // item.content.multiLine.out();
+      item.content.multiLine.out();
     }, 'start')
 
     // Preview elements come in a bit later
@@ -349,6 +352,8 @@ const initEvents = () => {
     hideContent();
   });
 };
+
+// Preload images and initialize scrolling animations
 
 initSmoothScrolling();
 animateOnScroll();

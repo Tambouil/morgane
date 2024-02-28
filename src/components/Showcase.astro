@@ -47,7 +47,6 @@ const columns = [firstColumn, secondColumn, thirdColumn];
       lerp: 0.2,
       smoothWheel: true,
     });
-
     const scrollFn = (time: number) => {
       lenis.raf(time);
       requestAnimationFrame(scrollFn);
@@ -57,13 +56,6 @@ const columns = [firstColumn, secondColumn, thirdColumn];
 
   const scroll = () => {
     const DOM = getDOM();
-    console.log(DOM);
-    // if (
-    //   Object.values(DOM.sections).some((el) => !el) ||
-    //   Object.values(DOM).some((el) => el instanceof NodeList && el.length === 0)
-    // ) {
-    //   return;
-    // }
 
     gsap
       .timeline({

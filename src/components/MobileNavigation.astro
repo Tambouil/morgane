@@ -11,7 +11,7 @@ const navItems = [
 ];
 
 const currentPath = Astro.url.pathname;
-const navItemCurrent = currentPath === '/' ? 'Accueil' : currentPath === '/portfolio' ? 'Portfolio' : '';
+const navItemCurrent = currentPath === '/' ? 'Accueil' : currentPath === '/portfolio/' ? 'Portfolio' : '';
 ---
 
 <nav class="mobile__nav">
